@@ -1,0 +1,81 @@
+﻿@if (Categoria is not null)
+{
+    <EditForm Enhance="true" method="post" FormName="CategoriaForm" OnValidSubmit="EditaAdicionaCategoria" Model="Categoria" id="EditaAdicionaCategoria">
+
+        <h3>@Cabecalho</h3>
+
+        @if (ModoEdicao)
+        {
+            <input type="hidden" name="Categoria.CategoriaId" value="@Categoria.CategoriaId" />
+        }
+
+        <div class="mb-3">
+            <label for="Descricao" class="form-label">Descrição</label>
+            <InputText id="Descricao" @bind-Value="Categoria.Descricao" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label for="DescricaoCategoria" class="form-label">Descrição da Categoria</label>
+            <InputText id="DescricaoCategoria" @bind-Value="Categoria.DescricaoCategoria" class="form-control" />
+        </div>        
+        <div class="mb-3">
+            <label for="situacao" class="form-label">Situacao</label>
+            <InputSelect id="situacao" @bind-Value="Categoria.Situacao" class="form-control">
+                <option value="0">
+                    Selecione
+                </option>
+                @foreach (var situacao in Enum.GetValues(typeof(ESituacao)))
+                {
+                    <option value="@situacao">
+                        @situacao.ToString()
+                    </option>
+                }
+            </InputSelect>
+        </div>
+        
+        <div class="mb-3">
+            <button class="btn btn-primary">
+                Enviar
+            </button>
+            <a href="/catalogocategorias" class="btn btn-secondary ms-3" data-enhance-nav="false">
+                Retornar para categorias
+            </a>
+        </div>
+
+
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+    </EditForm>
+}
+
+
+@code {
+
+    [Parameter]
+    public bool ModoEdicao { get; set; } = false;
+
+    [Parameter]
+    public int Id { get; set; }
+
+    [Parameter]
+    //informar o componente Pai que o Form foi enviado
+    public EventCallback<CategoriaDto> OnValidaCategoriaSubmit { get; set; }
+
+    [SupplyParameterFromForm(FormName = "CategoriaForm")]
+    public CategoriaDto? Categoria { get; set; }
+
+    private string Cabecalho => ModoEdicao ? $"Editar Categoria {Id}" : "Novo Categoria";
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (ModoEdicao)
+            Categoria ??= await categoriaQuery.ObterAsync(Id);
+        else
+            Categoria ??= new CategoriaDto();
+    }
+
+    private async Task EditaAdicionaCategoria()
+    {
+        await OnValidaCategoriaSubmit.InvokeAsync(Categoria);
+    }
+}

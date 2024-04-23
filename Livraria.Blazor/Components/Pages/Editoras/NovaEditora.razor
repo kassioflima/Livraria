@@ -1,0 +1,16 @@
+﻿@page "/novaeditora"
+<PageTitle>Nova Editora</PageTitle>
+
+<div class="row justify-content-center">
+    <div class="col-6">
+        <EditoraForm ModoEdicao="false" OnValidaEditoraSubmit="AdicionarEditora" />
+    </div>
+</div>
+
+@code {
+    private async Task AdicionarEditora(EditoraDto editora)
+    {
+        await editoraIncluirApplication.HandleAsync(editora);
+        navigation.NavigateTo("./catalogoeditoras");
+    }
+}

@@ -1,0 +1,41 @@
+﻿<div class="col-md-3 mb-3">
+    <div class="card custom-card">        
+        <div class="card-body">
+            <h5 class="card-title">@categoria.Descricao</h5>
+            <p class="card-text">@categoria.DescricaoCategoria</p>
+            <p class="cart-text">@categoria.Situacao</p>            
+            <div class="d-flex justify-content-between align-items-center mt-2">
+                <a href='/editacategoria/@categoria.CategoriaId' class="btn btn-primary">Editar</a>
+                <button @onclick="ConfirmaDialogo" class="btn btn-danger">Deletar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<DialogoComponent Exibir="exibirDialogo"
+                  OnCancel="CancelaExclusao"
+                  OnDelete="ConfirmaExclusao">
+    <h3 style="color:red;font-weight:bold">Confirma exclusão desta categoria : Id=@categoria.CategoriaId ?</h3>
+</DialogoComponent>
+
+@code {
+    [Parameter]
+    public required CategoriaDto categoria { get; set; }
+
+    private bool exibirDialogo;
+
+    private void ConfirmaDialogo()
+    {
+        exibirDialogo = true;
+    }
+    private void CancelaExclusao()
+    {
+        exibirDialogo = false;
+    }
+    private async Task ConfirmaExclusao()
+    {
+        await categoriaExcluirApplication.HandleAsync(categoria.CategoriaId);
+        exibirDialogo = false;
+        navigation.NavigateTo("./catalogocategorias");
+    }
+}

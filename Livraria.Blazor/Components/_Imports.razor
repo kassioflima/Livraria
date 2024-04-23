@@ -1,0 +1,39 @@
+﻿@using System.Net.Http
+@using System.Net.Http.Json
+@using Livraria.Domain.Shared.Domain.Enum
+@using Livraria.Domain.UseCases.Cagetorias.Dto
+@using Livraria.Domain.UseCases.Cagetorias.Interfaces.Application
+@using Livraria.Domain.UseCases.Cagetorias.Interfaces.Query
+@using Livraria.Domain.UseCases.Editoras.Dto
+@using Livraria.Domain.UseCases.Editoras.Interfaces.Application
+@using Livraria.Domain.UseCases.Editoras.Interfaces.Query
+@using Livraria.Domain.UseCases.Livros.Dto
+@using Livraria.Domain.UseCases.Livros.Interfaces.Application
+@using Livraria.Domain.UseCases.Livros.Interfaces.Query
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.AspNetCore.Components.Web
+@using static Microsoft.AspNetCore.Components.Web.RenderMode
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+@using Microsoft.JSInterop
+@using Livraria.Blazor
+@using Livraria.Blazor.Components
+@using Livraria.Blazor.Components.Pages.Categorias
+@using Livraria.Blazor.Components.Pages.Editoras
+@using Livraria.Blazor.Components.Pages.Livros
+
+@inject ICategoriaIncluirApplication categoriaIncluirApplication
+@inject ICategoriaAlterarApplication categoriaAlterarApplication
+@inject ICategoriaExcluirApplication categoriaExcluirApplication
+@inject ICategoriaQuery categoriaQuery
+
+@inject IEditoraIncluirApplication editoraIncluirApplication
+@inject IEditoraAlterarApplication editoraAlterarApplication
+@inject IEditoraExcluirApplication editoraExcluirApplication
+@inject IEditoraQuery editoraQuery
+
+@inject ILivroIncluirApplication livroIncluirApplication
+@inject ILivroAlterarApplication livroAlterarApplication
+@inject ILivroExcluirApplication livroExcluirApplication
+@inject ILivroQuery livroQuery
+@inject NavigationManager navigation

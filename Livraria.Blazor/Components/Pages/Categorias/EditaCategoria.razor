@@ -1,0 +1,22 @@
+﻿@page "/editacategoria/{id:int}"
+
+
+<PageTitle>Editar Categoria</PageTitle>
+
+<div class="row justify-content-center">
+    <div class="col-6">
+        <CategoriaForm ModoEdicao="true" Id="@Id" OnValidaCategoriaSubmit="EditarCategoria" />
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+
+    private async Task EditarCategoria(CategoriaDto categoria)
+    {
+        await categoriaAlterarApplication.HandleAsync(categoria);
+        navigation.NavigateTo("/catalogocategorias");
+    }
+}

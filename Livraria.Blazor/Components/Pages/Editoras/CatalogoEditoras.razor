@@ -1,0 +1,27 @@
+﻿@page "/catalogoeditoras"
+
+<h3>Catálogo de Editoras</h3>
+<p>
+    <a href="/novaeditora">Criar Nova Editora</a>
+</p>
+@if(editoras is null)
+{
+    <img src="/images/loading.gif" width="100" height="100" />
+}
+else
+{
+    <div class="row">
+        @foreach (var editora in editoras)
+        {
+            <EditorasCard @rendermode="InteractiveServer" Editora="@editora" />
+        }
+    </div>
+}
+@code {
+    IEnumerable<EditoraDto>? editoras;
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(800);
+        editoras = await editoraQuery.ObterAsync();
+    }
+}

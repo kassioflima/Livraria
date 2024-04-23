@@ -1,0 +1,29 @@
+﻿@page "/catalogocategorias"
+
+<h3>Categorias</h3>
+
+<p>
+    <a href="/novacategoria">Criar Nova Categoria</a>
+</p>
+@if (categorias is null)
+{
+   <img src="/images/loading.gif" width="100" height="100" />
+}
+else
+{
+    <div class="row">
+        @foreach (var categoria in categorias)
+        {
+            <CategoriasCard @rendermode="InteractiveServer" Categoria="@categoria" />
+        }
+    </div>
+}
+
+@code {
+    IEnumerable<CategoriaDto>? categorias;
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(800);
+        categorias = await categoriaQuery.ObterAsync();
+    }
+}

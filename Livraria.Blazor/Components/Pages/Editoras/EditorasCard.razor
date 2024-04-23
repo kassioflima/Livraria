@@ -1,0 +1,41 @@
+﻿<div class="col-md-3 mb-3">
+    <div class="card custom-card">        
+        <div class="card-body">
+            <h5 class="card-title">@editora.EditoraId</h5>
+            <p class="card-text">@editora.Nome</p>
+            <p class="card-text">Situação: @editora.Situacao.ToString()</p>
+            <div class="d-flex justify-content-between align-items-center mt-2">
+                <a href='/editaeditora/@editora.EditoraId' class="btn btn-primary">Editar</a>
+                <button @onclick="ConfirmaDialogo" class="btn btn-danger">Deletar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<DialogoComponent Exibir="exibirDialogo"
+                  OnCancel="CancelaExclusao"
+                  OnDelete="ConfirmaExclusao">
+    <h3 style="color:red;font-weight:bold">Confirma exclusão deste editora : Id=@editora.EditoraId ?</h3>
+</DialogoComponent>
+
+@code {
+    [Parameter]
+    public required EditoraDto editora { get; set; }
+
+    private bool exibirDialogo;
+
+    private void ConfirmaDialogo()
+    {
+        exibirDialogo = true;
+    }
+    private void CancelaExclusao()
+    {
+        exibirDialogo = false;
+    }
+    private async Task ConfirmaExclusao()
+    {
+        await editoraExcluirApplication.HandleAsync(editora.EditoraId);
+        exibirDialogo = false;
+        navigation.NavigateTo("./catalogoeditoras");
+    }
+}

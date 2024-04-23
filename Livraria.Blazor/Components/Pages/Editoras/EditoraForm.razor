@@ -1,0 +1,74 @@
+﻿@if (Editora is not null)
+{
+    <EditForm Enhance="true" method="post" FormName="EditoraForm" OnValidSubmit="EditaAdicionaEditora" Model="Editora" id="EditaAdicionaEditora">
+
+        <h3>@Cabecalho</h3>
+
+        @if (ModoEdicao)
+        {
+            <input type="hidden" name="Editora.EditoraId" value="@Editora.EditoraId" />
+        }
+
+        <div class="mb-3">
+            <label for="nome" class="form-label">Nome</label>
+            <InputText id="nome" @bind-Value="Editora.Nome" class="form-control" />
+        </div>        
+        <div class="mb-3">
+            <label for="situacao" class="form-label">Editora</label>
+            <InputSelect id="situacao" @bind-Value="Editora.Situacao" class="form-control">
+                <option value="0">
+                    Selecione
+                </option>
+                @foreach (var situacao in Enum.GetValues(typeof(ESituacao)))
+                {
+                    <option value="@situacao">
+                        @situacao.ToString()
+                    </option>
+                }
+            </InputSelect>
+        </div>        
+        <div class="mb-3">
+            <button class="btn btn-primary">
+                Enviar
+            </button>
+            <a href="/editoras" class="btn btn-secondary ms-3" data-enhance-nav="false">
+                Retornar para editoras
+            </a>
+        </div>
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+    </EditForm>
+}
+
+
+@code {
+    [Parameter]
+    public bool ModoEdicao { get; set; } = false;
+
+    [Parameter]
+    public int Id { get; set; }
+
+    [Parameter]
+    //informar o componente Pai que o Form foi enviado
+    public EventCallback<EditoraDto> OnValidaEditoraSubmit { get; set; }
+
+    [SupplyParameterFromForm(FormName = "EditoraForm")]
+    public EditoraDto? Editora { get; set; }
+
+    private string Cabecalho => ModoEdicao ? $"Editar Editora {Id}" : "Novo Editora";
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (ModoEdicao)
+            Editora ??= await editoraQuery.ObterAsync(Id);
+        else
+            Editora ??= new EditoraDto();
+    }
+
+    private async Task EditaAdicionaEditora()
+    {
+        await OnValidaEditoraSubmit.InvokeAsync(Editora);
+    }
+
+}

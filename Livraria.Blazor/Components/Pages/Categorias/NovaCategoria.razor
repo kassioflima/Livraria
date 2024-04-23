@@ -1,0 +1,17 @@
+﻿@page "/novacategoria"
+
+<PageTitle>Nova Categoria</PageTitle>
+
+<div class="row justify-content-center">
+    <div class="col-6">
+        <CategoriaForm ModoEdicao="false" OnValidaCategoriaSubmit="AdicionarCategoria" />
+    </div>
+</div>
+
+@code {
+    private async Task AdicionarCategoria(CategoriaDto categoria)
+    {
+        await categoriaIncluirApplication.HandleAsync(categoria);
+        navigation.NavigateTo("./catalogocategorias");
+    }
+}
