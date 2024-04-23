@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Livraria.Domain", "src\Livr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Livraria.Infrastructure", "src\Livraria.Infrastructure\Livraria.Infrastructure.csproj", "{0E16B9F5-F175-483C-A16F-20D687F81B6F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Livraria.Blazor", "Livraria.Blazor\Livraria.Blazor.csproj", "{29DB3FBF-578C-496B-ACBD-283B9F16FA54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Livraria.Blazor", "src\Livraria.Blazor\Livraria.Blazor.csproj", "{A7C56BAD-2013-48A2-913B-3D85841409A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{0E16B9F5-F175-483C-A16F-20D687F81B6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E16B9F5-F175-483C-A16F-20D687F81B6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E16B9F5-F175-483C-A16F-20D687F81B6F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{29DB3FBF-578C-496B-ACBD-283B9F16FA54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{29DB3FBF-578C-496B-ACBD-283B9F16FA54}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{29DB3FBF-578C-496B-ACBD-283B9F16FA54}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{29DB3FBF-578C-496B-ACBD-283B9F16FA54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7C56BAD-2013-48A2-913B-3D85841409A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7C56BAD-2013-48A2-913B-3D85841409A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7C56BAD-2013-48A2-913B-3D85841409A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7C56BAD-2013-48A2-913B-3D85841409A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
